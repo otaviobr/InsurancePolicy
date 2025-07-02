@@ -27,7 +27,7 @@ public class PolicyRegistrationController : ControllerBase
         _activationHandler = activationHandler;
     }
 
-    [HttpPost("simulation")]
+    [HttpPost("Simulation")]
     public async Task<IActionResult> Simulation([FromBody] SimulationRequest request, CancellationToken cancellationToken)
     {
         var validationResult = _validator.Validate(request);
