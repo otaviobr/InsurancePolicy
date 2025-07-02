@@ -60,3 +60,8 @@ Para rodar, é necessário utilizar WSL. Rode o comando "docker compose up" que 
   "carBrand": "Fiat",
   "carModelYear": 2014
 }
+
+# Testes de performance
+## 320 usuarios durante 1 minuto
+![image](https://github.com/user-attachments/assets/b30f25a1-d5ea-4058-b996-d9d3f5d6cad9)
+
