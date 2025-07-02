@@ -1,0 +1,39 @@
+version: '3.4'
+
+services:
+  mongodb-insurance-policy:
+    image: mongo:latest
+    container_name: mongodb-insurance-policy
+    hostname: mongodb-insurance-policy
+    restart: always
+    environment:
+      - MONGO_REPLICA_SET_NAME=${MONGO_REPLICA_SET_NAME}
+    networks:
+      - insurance-policy
+    ports:
+      - "27017:27017"
+    volumes:
+      - "mongo-insurance-policy:/data/db"
+      - "./migrations/mongodb/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro"
+      - "./config/mongod.conf:/etc/mongod.conf:ro"
+    healthcheck:
+        test: test $$(echo "rs.initiate().ok || rs.status().ok" | mongo --quiet) -eq 1
+        interval: 10s
+        start_period: 30s
+    command: ["--replSet", "${MONGO_REPLICA_SET_NAME}", "--bind_ip_all"]
+  insurance-policy-api:
+    build: .
+    container_name: insurance-policy-api
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - insurance-policy
+      
+volumes:
+  mongo-insurance-policy:
+    driver: local
+
+networks: 
+  insurance-policy:
+    name: insurance-policy
