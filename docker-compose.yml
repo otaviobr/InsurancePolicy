@@ -7,7 +7,7 @@ services:
     hostname: mongodb-insurance-policy
     restart: always
     environment:
-      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}  # Adicione essa variável se precisar de um banco de dados inicial
+      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
     networks:
       - insurance-policy
     ports:
