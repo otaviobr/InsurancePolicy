@@ -69,13 +69,5 @@ public class PolicyRegistrationController : ControllerBase
         else
             return BadRequest("Activation failed.");
     }
-
-    [HttpGet]
-    public async Task<IActionResult> Teste()
-    {
-        await _registrationHandler.AtualizarFipe();
-
-        return Ok();
-    }
 }
 
